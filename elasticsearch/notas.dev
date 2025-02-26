@@ -1,0 +1,20 @@
+1. Docker Elasticsearch Starter (Nao-Fixo)
+    docker run -d --name elasticsearch -p 9200:9200 -e "discovery.type=single-node" -e "ELASTIC_PASSWORD=senha_secreta" docker.elastic.co/elasticsearch/elasticsearch:8.10.0
+
+2. Java application.properties
+    spring.elasticsearch.uris=https://localhost:9200
+    spring.elasticsearch.username=elastic
+    spring.elasticsearch.password=senha_secreta
+    spring.elasticsearch.ssl.verification-mode=none
+
+3. Java pom.xml
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-elasticsearch</artifactId>
+            <version>3.1.0</version>
+        </dependency>
+    </dependencies>
+
+4. Logs do Elasticsearch para password
+    docker logs elasticsearch
