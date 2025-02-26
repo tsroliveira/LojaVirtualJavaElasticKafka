@@ -1,35 +1,33 @@
-# Locadora de Carros
+# Loja Virtual
 
 ## Requisitos
-- PHP >= 8.1.x
-- Composer
+- Java >= 17.x.x
+- Maven
 - Node.js
 - npm
 
 ## Tecnologias
 - Frontend com React para a interface do usuário.
-- Backend em PHP utilizando Laravel para criar a API que servirá os dados dos veículos.
+- Backend em Java utilizando Spring Boot para criar a API.
 - Banco de Dados MySQL.
+- Docker para o serviço do ElasticSearch
 
 ## Instalação
 
-1. Clone o repositório AppLojaCarros.
+1. Clone o repositório LojaVirtualJavaElasticKafka.
    ```sh
-   git clone https://github.com/tsroliveira/AppLojaCarros.git
+   git clone https://github.com/tsroliveira/LojaVirtualJavaElasticKafka.git
    ```
-2. Navegue até a pasta \api onde está o nosso BackEnd PHP Laravel.
+2. Rode os scripts de configuração do banco de dados MySQL.
    ```sh
-   cd .\AppLojaCarros\api\
+   dumpDB_produtos.20250226.sql
    ```
-3. Instale as dependencias.
+3. Navegue até o Docker do ElasticSearch e execute o serviço.
    ```sh
-   composer install
+      cd \LojaVirtualJavaElasticKafka\elasticsearch\
+      docker-compose up -d
    ```
-4. Copie o arquivo .env e configure a conexão com o banco de dados MySQL.
-   ```sh
-   cp .env.example .env
-   ```
-5. Segue abaixo exemplo de configuração.
+4. Configure a conexão com o banco no arquivo application.properties.
    ```sh
    DB_CONNECTION=mysql
    DB_HOST=127.0.0.1
@@ -38,27 +36,24 @@
    DB_USERNAME=root
    DB_PASSWORD=root
    ```
-6. Execute as migrations para criar o banco de dados "carros" e as tabelas
+5. Navegue a pasta \LojaVirtualJavaElasticKafka\java instale as dependencias e execute a aplicação principal.
    ```sh
-   php artisan key:generate
+      mvn clean install
+      mvn spring-boot:run
    ```
+6. Configure a collection no Postman ou outra ferramenta de seu uso e faça os testes de cada endpoint.
    ```sh
-   php artisan migrate --seed
+      VirtualStoreJava.Postman_Collection.json
    ```
-7. Inicialize a aplicação backend. 
+7. Abra uma nova janela de terminal e navege até a pasta do FrontEnd em React.
    ```sh
-   php artisan serve
-   ```
-
-8. Abra uma nova janela de terminal e navege até a pasta do FrontEnd em React.
-   ```sh
-   cd .\AppLojaCarros\web\
+   cd .\LojaVirtualJavaElasticKafka\web\
    ```
 7. Instale as dependencias do projeto FrontEnd.
    ```sh
    npm install
    ```
-8. Execute o projeto.
+8. Execute o frontend do projeto.
    ```sh
    npm start
    ```
